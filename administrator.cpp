@@ -5,6 +5,7 @@
 #include <QtSql/QtSql>
 #include "QStandardItemModel"
 #include "QStandardItem"
+#include <QCalendarWidget>
 #include <QtSql/QSqlDatabase>
 #include <QString>
 #include <QDate>
@@ -19,6 +20,7 @@ Administrator::Administrator(QWidget *parent) :
 {
   ui->setupUi(this);
   ui->tabWidget->resize(Administrator::width(),Administrator::height());
+  ui->calendarWidget->setSelectedDate(QDate::currentDate());
   setEnabled(false);
   printTable();
   printRequest();
@@ -352,4 +354,14 @@ void Administrator::on_textEdit_textChanged()
 void Administrator::setEnabled(bool enable){
   ui->pushButtonRemove->setEnabled(enable);
   ui->pushButtonRename->setEnabled(enable);
+}
+
+void Administrator::on_calendarWidget_currentPageChanged(int year, int month)
+{
+
+}
+
+void Administrator::on_calendarWidget_selectionChanged()
+{
+  ui->textEditDate->setText(ui->calendarWidget->selectedDate().toString(Qt::ISODate));
 }

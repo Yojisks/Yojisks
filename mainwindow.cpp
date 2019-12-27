@@ -43,11 +43,14 @@ int getResponce(QString request){
   if(db.isOpen()){
     QSqlQuery *query = new QSqlQuery(db);
     if(query->exec(request)){
-      return query->size();
+      int size=query->size();
       db.close();
+      db.removeDatabase("Users");
+      return size;
     }
   }
   db.close();
+  db.removeDatabase("Users");
   return 0;
 }
 
