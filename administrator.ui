@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Administrator</class>
+ <widget class="QWidget" name="Administrator">
+  <property name="windowModality">
+   <enum>Qt::NonModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1500</width>
+    <height>700</height>
+   </rect>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1500</width>
+    <height>700</height>
+   </size>
+  </property>
+  <property name="contextMenuPolicy">
+   <enum>Qt::DefaultContextMenu</enum>
+  </property>
+  <property name="windowTitle">
+   <string>Администратор</string>
+  </property>
+  <property name="layoutDirection">
+   <enum>Qt::LeftToRight</enum>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <property name="windowFilePath">
+   <string/>
+  </property>
+  <widget class="QTabWidget" name="tabWidget">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1801</width>
+     <height>831</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>UpArrowCursor</cursorShape>
+   </property>
+   <property name="contextMenuPolicy">
+    <enum>Qt::DefaultContextMenu</enum>
+   </property>
+   <property name="tabPosition">
+    <enum>QTabWidget::North</enum>
+   </property>
+   <property name="currentIndex">
+    <number>0</number>
+   </property>
+   <property name="elideMode">
+    <enum>Qt::ElideNone</enum>
+   </property>
+   <widget class="QWidget" name="tab">
+    <attribute name="title">
+     <string>Контроллеры</string>
+    </attribute>
+    <widget class="QTableView" name="tableViewControllers">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>60</y>
+       <width>1051</width>
+       <height>591</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBoxSoftWare">
+     <property name="geometry">
+      <rect>
+       <x>1300</x>
+       <y>208</y>
+       <width>141</width>
+       <height>25</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBoxType">
+     <property name="geometry">
+      <rect>
+       <x>1300</x>
+       <y>268</y>
+       <width>141</width>
+       <height>25</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBoxMode">
+     <property name="geometry">
+      <rect>
+       <x>1300</x>
+       <y>178</y>
+       <width>141</width>
+       <height>25</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBoxProgrammer">
+     <property name="geometry">
+      <rect>
+       <x>1300</x>
+       <y>238</y>
+       <width>141</width>
+       <height>25</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="textEditDate">
+     <property name="geometry">
+      <rect>
+       <x>1300</x>
+       <y>60</y>
+       <width>141</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="tabChangesFocus">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="textEditControllerID">
+     <property name="geometry">
+      <rect>
+       <x>1300</x>
+       <y>30</y>
+       <width>141</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="tabChangesFocus">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="textEditBoardNumber">
+     <property name="geometry">
+      <rect>
+       <x>1300</x>
+       <y>90</y>
+       <width>141</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="tabChangesFocus">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="textEditSensorNumber">
+     <property name="geometry">
+      <rect>
+       <x>1300</x>
+       <y>120</y>
+       <width>141</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="tabChangesFocus">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="textEdit70027Number">
+     <property name="geometry">
+      <rect>
+       <x>1300</x>
+       <y>150</y>
+       <width>141</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="tabChangesFocus">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="textEditSDCardNumber">
+     <property name="geometry">
+      <rect>
+       <x>1300</x>
+       <y>300</y>
+       <width>141</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="tabChangesFocus">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelControllerID">
+     <property name="geometry">
+      <rect>
+       <x>1130</x>
+       <y>30</y>
+       <width>131</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Номер контроллера</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelDate">
+     <property name="geometry">
+      <rect>
+       <x>1130</x>
+       <y>60</y>
+       <width>131</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Дата</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelBoardNumber">
+     <property name="geometry">
+      <rect>
+       <x>1130</x>
+       <y>90</y>
+       <width>131</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Номер платы</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelSensorNumber">
+     <property name="geometry">
+      <rect>
+       <x>1130</x>
+       <y>120</y>
+       <width>131</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Номер датчика</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label70027Number">
+     <property name="geometry">
+      <rect>
+       <x>1130</x>
+       <y>150</y>
+       <width>131</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Номер 70027 платы</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelMode">
+     <property name="geometry">
+      <rect>
+       <x>1130</x>
+       <y>180</y>
+       <width>131</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Модификация</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelSoftWare">
+     <property name="geometry">
+      <rect>
+       <x>1130</x>
+       <y>210</y>
+       <width>131</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Версия ПО</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelProgrammer">
+     <property name="geometry">
+      <rect>
+       <x>1130</x>
+       <y>240</y>
+       <width>131</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Сотрудник</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelType">
+     <property name="geometry">
+      <rect>
+       <x>1130</x>
+       <y>270</y>
+       <width>131</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Тип</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelSDCardNumber">
+     <property name="geometry">
+      <rect>
+       <x>1130</x>
+       <y>300</y>
+       <width>131</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Номер SD карты</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelStatus">
+     <property name="geometry">
+      <rect>
+       <x>1130</x>
+       <y>340</y>
+       <width>131</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Статус: Всё хорошо</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButtonEnter">
+     <property name="geometry">
+      <rect>
+       <x>1130</x>
+       <y>380</y>
+       <width>101</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Добавить</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButtonRename">
+     <property name="geometry">
+      <rect>
+       <x>1240</x>
+       <y>380</y>
+       <width>101</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Заменить</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButtonRemove">
+     <property name="geometry">
+      <rect>
+       <x>1350</x>
+       <y>380</y>
+       <width>91</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Удалить</string>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="textEdit">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>181</width>
+       <height>21</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab_2">
+    <attribute name="title">
+     <string>Пользователи</string>
+    </attribute>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
