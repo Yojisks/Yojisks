@@ -21,6 +21,14 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButtonAutorization_clicked()
 {
+  QString fname = "login.txt";
+  QFile file(fname);
+  if ( !QFile::exists(fname) ) {
+    if (file.open(QIODevice::WriteOnly | QIODevice::Append)) {
+        file.write("login=Test\npassword=");
+        file.close();
+    }
+  }
   QString autorization;
   autorization = "SELECT Permissions FROM umfdb.Users where User = '"+ui->textEditLogin->toPlainText()+"' and Password = '"+ui->textEditPWD->toPlainText()+"'";
   if(getResponce(autorization)){
