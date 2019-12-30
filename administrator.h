@@ -35,6 +35,10 @@ private slots:
 
   void on_calendarWidget_selectionChanged();
 
+  void on_textEditControllerID_textChanged();
+
+  void on_calendarWidget_clicked(const QDate &date);
+
 private:
   int ModelIndex[2];
   Ui::Administrator *ui;

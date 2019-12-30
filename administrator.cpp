@@ -12,6 +12,7 @@
 #include <vector>
 
 QSqlDatabase getConnection();
+bool checkString(QString str);
 
 std::vector<int> ids;
 Administrator::Administrator(QWidget *parent) :
@@ -22,6 +23,7 @@ Administrator::Administrator(QWidget *parent) :
   ui->tabWidget->resize(Administrator::width(),Administrator::height());
   ui->calendarWidget->setSelectedDate(QDate::currentDate());
   setEnabled(false);
+  ui->tableViewControllers->setSortingEnabled(true);
   printTable();
   printRequest();
 }
@@ -190,6 +192,7 @@ void Administrator::addToTableControllers(){
   db.open();
   if(db.isOpen()){
     QSqlQuery *query = new QSqlQuery(db);
+    //if((checkString(ui->textEditControllerID->toPlainText())) || (checkString(ui->textEditDate->toPlainText())) || (checkString(ui->textEditBoardNumber->toPlainText())) || (checkString(ui->textEditSensorNumber->toPlainText())))
     QString req= "INSERT INTO `umfdb`.`Controllers`(`ControllerID`,`DATE`,`BoardNumber`,`SensorNumber`,`70027Number`,`Mode`,`SoftwareVersion`,`Programmer`,`Type`,`Reason`,`Client`,`SetupPlace`,`SDCardNumber`) VALUES ('"
         +ui->textEditControllerID->toPlainText()+"'"+","
         +"'"+ui->textEditDate->toPlainText()+"'"+","
@@ -234,7 +237,7 @@ void Administrator::on_tableViewControllers_clicked(const QModelIndex &index)
   ui->comboBoxType->setCurrentText(myIndex.data().toString());
   myIndex = ui->tableViewControllers->model()->index( ModelIndex[0], 9, QModelIndex());
   ui->textEditSDCardNumber->setText(myIndex.data().toString());
-  setEnabled(true);
+  setEnabled(true);//TODO: Может здесь, может не здесь придумать сортировку, пока на ум ничего не пришло
 }
 
 void Administrator::on_pushButtonRemove_clicked(){
@@ -287,7 +290,7 @@ void Administrator::on_textEdit_textChanged()
   QSqlDatabase db = getConnection();
   db.open();
   QSqlQuery *query = new QSqlQuery(db);
-  if(db.isOpen()){
+  if((db.isOpen()) && (checkString(ui->textEdit->toPlainText()))){
   QString req = "SELECT id, ControllerID, DATE, BoardNumber,SensorNumber,70027Number, Mode, SoftwareVersion, Programmer, Type,SDCardNumber from umfdb.Controllers WHERE `ControllerID` like '%"
                    +ui->textEdit->toPlainText()+"%' or `DATE` like '%"
                    +ui->textEdit->toPlainText()+"%' or `BoardNumber` like '%"
@@ -356,12 +359,14 @@ void Administrator::setEnabled(bool enable){
   ui->pushButtonRename->setEnabled(enable);
 }
 
-void Administrator::on_calendarWidget_currentPageChanged(int year, int month)
-{
-
+bool checkString(QString str){
+  if((str.contains("%")) || (str.contains(";")) || (str.contains("'")) || (str.contains("+"))){
+    return false;
+  }
+  return true;
 }
 
-void Administrator::on_calendarWidget_selectionChanged()
+void Administrator::on_calendarWidget_clicked(const QDate &date)
 {
-  ui->textEditDate->setText(ui->calendarWidget->selectedDate().toString(Qt::ISODate));
+  ui->textEditDate->setText(date.toString(Qt::ISODate));
 }
