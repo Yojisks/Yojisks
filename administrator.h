@@ -31,7 +31,6 @@ private slots:
   void on_textEdit_textChanged();
 
   void setEnabled(bool enable);
-  void on_calendarWidget_currentPageChanged(int year, int month);
 
   void on_calendarWidget_selectionChanged();
 

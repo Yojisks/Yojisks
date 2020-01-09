@@ -20,6 +20,7 @@ private slots:
 
 private:
   Ui::MainWindow *ui;
+  void checkTXTfile();
 };
 
 #endif // MAINWINDOW_H

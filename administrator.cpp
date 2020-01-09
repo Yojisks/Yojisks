@@ -52,7 +52,7 @@ void Administrator::printRequest(){
     while (query->next()) {
       ui->comboBoxProgrammer->addItem(query->value(ProgCol).toString());
     }
-    query->exec("SELECT Software_version FROM umfdb.Software_version ORDER BY `idSoftware_version`");
+    query->exec("SELECT Software_version FROM umfdb.Software_version ORDER BY `idSoftware_version` DESC LIMIT 10");
     rec = query->record();
     int PO = rec.indexOf("Software_version");
     while (query->next()) {
@@ -91,7 +91,6 @@ void Administrator::printTable(){
       //horizontalHeader.append("Клиент");
       //horizontalHeader.append("Место установки");
       horizontalHeader.append("Номер SD карты");
-
       //Заголовки строк
       QStringList verticalHeader;
       for(int i=0;i<query->size();i++){

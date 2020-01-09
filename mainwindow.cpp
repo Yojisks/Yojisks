@@ -4,6 +4,8 @@
 #include <QtSql/QSqlDatabase>
 #include <iostream>
 #include "administrator.h"
+#include <chrono>
+#include <thread>
 
 int getResponce(QString query);
 
@@ -12,11 +14,24 @@ MainWindow::MainWindow(QWidget *parent) :
   ui(new Ui::MainWindow)
 {
   ui->setupUi(this);
+  checkTXTfile();
 }
 
 MainWindow::~MainWindow()
 {
   delete ui;
+}
+
+void MainWindow::checkTXTfile(){
+  QString fname = "login.txt";
+  QFile file(fname);
+    if (QFile::exists(fname) ) {
+//      hide();
+//      Administrator *f1 = new Administrator;
+//      f1->showMaximized();
+//      f1->show();
+//      on_pushButtonAutorization_clicked();
+    }
 }
 
 void MainWindow::on_pushButtonAutorization_clicked()
@@ -25,8 +40,10 @@ void MainWindow::on_pushButtonAutorization_clicked()
   QFile file(fname);
   if ( !QFile::exists(fname) ) {
     if (file.open(QIODevice::WriteOnly | QIODevice::Append)) {
-        file.write("login=Test\npassword=");
-        file.close();
+      QString pwd = "login="+ui->textEditLogin->toPlainText()+"\npassword="+ui->textEditPWD->toPlainText();
+      QTextStream stream(&file);
+      stream << pwd;
+      file.close();
     }
   }
   QString autorization;
@@ -38,7 +55,6 @@ void MainWindow::on_pushButtonAutorization_clicked()
     f1->show();
   }
 }
-
 
 int getResponce(QString request){
   QSqlDatabase db;
