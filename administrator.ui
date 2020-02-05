@@ -69,8 +69,8 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>60</y>
-       <width>1051</width>
+       <y>50</y>
+       <width>1111</width>
        <height>591</height>
       </rect>
      </property>
@@ -409,8 +409,305 @@
    </widget>
    <widget class="QWidget" name="tab_2">
     <attribute name="title">
-     <string>Пользователи</string>
+     <string>Платы</string>
     </attribute>
+    <widget class="QTableView" name="tableViewPlates">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>50</y>
+       <width>1071</width>
+       <height>591</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="textPlateEditDate">
+     <property name="geometry">
+      <rect>
+       <x>1300</x>
+       <y>60</y>
+       <width>141</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="tabChangesFocus">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelPlateDate">
+     <property name="geometry">
+      <rect>
+       <x>1130</x>
+       <y>60</y>
+       <width>131</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Дата</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButtonAdd">
+     <property name="geometry">
+      <rect>
+       <x>1130</x>
+       <y>350</y>
+       <width>101</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Добавить</string>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="textEditPlateSearch">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>181</width>
+       <height>21</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelPlateNumber">
+     <property name="geometry">
+      <rect>
+       <x>1130</x>
+       <y>30</y>
+       <width>131</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Номер платы</string>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="textPlateNumber">
+     <property name="geometry">
+      <rect>
+       <x>1300</x>
+       <y>30</y>
+       <width>141</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="tabChangesFocus">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelPlateVersion">
+     <property name="geometry">
+      <rect>
+       <x>1130</x>
+       <y>90</y>
+       <width>131</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Версия</string>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="textPlateVersion">
+     <property name="geometry">
+      <rect>
+       <x>1300</x>
+       <y>90</y>
+       <width>141</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="tabChangesFocus">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="textPlateName">
+     <property name="geometry">
+      <rect>
+       <x>1300</x>
+       <y>120</y>
+       <width>141</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="tabChangesFocus">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelPlateName">
+     <property name="geometry">
+      <rect>
+       <x>1130</x>
+       <y>120</y>
+       <width>131</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Название</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelPlateUser">
+     <property name="geometry">
+      <rect>
+       <x>1130</x>
+       <y>150</y>
+       <width>131</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Прошивальщик</string>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="textPlateSettings">
+     <property name="geometry">
+      <rect>
+       <x>1300</x>
+       <y>180</y>
+       <width>141</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="tabChangesFocus">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelPlateSettings">
+     <property name="geometry">
+      <rect>
+       <x>1130</x>
+       <y>180</y>
+       <width>131</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Настройка</string>
+     </property>
+    </widget>
+    <widget class="QTextEdit" name="textPlateErrors">
+     <property name="geometry">
+      <rect>
+       <x>1300</x>
+       <y>210</y>
+       <width>141</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="tabChangesFocus">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelPlateErrors">
+     <property name="geometry">
+      <rect>
+       <x>1130</x>
+       <y>210</y>
+       <width>131</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Ошибки</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelPlateLock">
+     <property name="geometry">
+      <rect>
+       <x>1130</x>
+       <y>240</y>
+       <width>131</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Защита</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButtonMove">
+     <property name="geometry">
+      <rect>
+       <x>1240</x>
+       <y>350</y>
+       <width>101</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Изменить</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButtonPlateRemove">
+     <property name="geometry">
+      <rect>
+       <x>1350</x>
+       <y>350</y>
+       <width>101</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Удалить</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBoxLock">
+     <property name="geometry">
+      <rect>
+       <x>1300</x>
+       <y>240</y>
+       <width>141</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <item>
+      <property name="text">
+       <string>Lock</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Unlock</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QComboBox" name="comboBoxUser">
+     <property name="geometry">
+      <rect>
+       <x>1300</x>
+       <y>150</y>
+       <width>141</width>
+       <height>25</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelPlateStatus">
+     <property name="geometry">
+      <rect>
+       <x>1130</x>
+       <y>300</y>
+       <width>311</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Статус: Всё хорошо</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButtonRed">
+     <property name="geometry">
+      <rect>
+       <x>1130</x>
+       <y>390</y>
+       <width>101</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Перекрасить</string>
+     </property>
+    </widget>
    </widget>
   </widget>
  </widget>

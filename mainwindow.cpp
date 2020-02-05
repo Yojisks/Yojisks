@@ -69,7 +69,7 @@ int getResponce(QString request){
     if(query->exec(request)){
       int size=query->size();
       db.close();
-      db.removeDatabase("Users");
+   //   db.removeDatabase("Users");
       return size;
     }
   }
