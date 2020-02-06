@@ -16,6 +16,7 @@ QSqlDatabase getConnection(QString ConnectionName);
 bool checkString(QString str);
 
 std::vector<int> ids;
+std::vector<int> idUmfs;
 Administrator::Administrator(QWidget *parent) :
   QWidget(parent),
   ui(new Ui::Administrator)
@@ -76,7 +77,7 @@ void Administrator::printTableControllers(){
   db.open();
   QSqlQuery *query = new QSqlQuery(db);
   if(db.isOpen()){
-    if(query->exec("SELECT id, ControllerID, DATE, BoardNumber,SensorNumber,70027Number, Mode, SoftwareVersion, Programmer, Type,SDCardNumber from umfdb.Controllers ORDER BY id DESC;")){
+    if(query->exec("SELECT *"/* id, ControllerID, DATE, BoardNumber,SensorNumber,70027Number, Mode, SoftwareVersion, Programmer, Type,SDCardNumber*/ "from umfdb.Controllers ORDER BY id DESC;")){
       QStandardItemModel *model = new QStandardItemModel;
       QStandardItem *item;
 
@@ -91,9 +92,9 @@ void Administrator::printTableControllers(){
       horizontalHeader.append("Версия ПО");
       horizontalHeader.append("Прошивший");
       horizontalHeader.append("Тип");
-      //horizontalHeader.append("Причина");
-      //horizontalHeader.append("Клиент");
-      //horizontalHeader.append("Место установки");
+      horizontalHeader.append("Причина");
+      horizontalHeader.append("Клиент");
+      horizontalHeader.append("Место установки");
       horizontalHeader.append("Номер SD карты");
       //Заголовки строк
       QStringList verticalHeader;
@@ -120,6 +121,9 @@ void Administrator::printTableControllers(){
       ui->tableViewControllers->setModel(model);
       ui->tableViewControllers->resizeRowsToContents();
       ui->tableViewControllers->resizeColumnsToContents();
+      ui->tableViewControllers->setColumnHidden(9,true);
+      ui->tableViewControllers->setColumnHidden(10,true);
+      ui->tableViewControllers->setColumnHidden(11,true);
     } else {
       ui->labelStatus->setText("Статус: Ошибка соединения");
     }
@@ -160,12 +164,14 @@ void Administrator::printTablePlates(){
       }
       model->setHorizontalHeaderLabels(horizontalHeader);
       model->setVerticalHeaderLabels(verticalHeader);
-      ids.clear();
-      ids.reserve(verticalHeader.count());
+      idUmfs.clear();
+      idUmfs.reserve(verticalHeader.count());
       for(int i=0;i<verticalHeader.count()+1;i++){
-        ids.push_back(query->value(0).toInt());
+        idUmfs.push_back(query->value(0).toInt());
         if (query->value(8).toString() == "red"){
           red[i]=1;
+        } else {
+          red[i]=0;
         }
         for(int j=0;j<horizontalHeader.count();j++){
           if (query->value(j).toString() == ""){
@@ -279,7 +285,9 @@ void Administrator::addToTableControllers(){
         +"'"+ui->comboBoxSoftWare->currentText()+"'"+","
         +"'"+ui->comboBoxProgrammer->currentText()+"'"+","
         +"'"+ui->comboBoxType->currentText()+"'"+","
-        +"'Нет данных',"+"'Нет данных',"+"'Нет данных',"
+        +"'"+ui->textEditReason->toPlainText()+"'"+","
+        +"'"+ui->textEditClient->toPlainText()+"'"+","
+        +"'"+ui->textEditSetupPlace->toPlainText()+"'"+","
         +"'"+ui->textEditSDCardNumber->toPlainText()+"'"+");";
     if(query->exec(req)){
       ui->labelStatus->setText("Статус: Всё хорошо");
@@ -336,6 +344,12 @@ void Administrator::on_tableViewControllers_clicked(const QModelIndex &index)
   myIndex = ui->tableViewControllers->model()->index( ControllerModelIndex[0], 8, QModelIndex());
   ui->comboBoxType->setCurrentText(myIndex.data().toString());
   myIndex = ui->tableViewControllers->model()->index( ControllerModelIndex[0], 9, QModelIndex());
+  ui->textEditReason->setText(myIndex.data().toString());
+  myIndex = ui->tableViewControllers->model()->index( ControllerModelIndex[0], 10, QModelIndex());
+  ui->textEditClient->setText(myIndex.data().toString());
+  myIndex = ui->tableViewControllers->model()->index( ControllerModelIndex[0], 11, QModelIndex());
+  ui->textEditSetupPlace->setText(myIndex.data().toString());
+  myIndex = ui->tableViewControllers->model()->index( ControllerModelIndex[0], 12, QModelIndex());
   ui->textEditSDCardNumber->setText(myIndex.data().toString());
   setEnabledControllerButtons(true);//TODO: Может здесь, может не здесь придумать сортировку, пока на ум ничего не пришло
 }
@@ -370,9 +384,9 @@ void Administrator::on_pushButtonRename_clicked()
         "`SoftwareVersion` = '"+ui->comboBoxSoftWare->currentText()+"'"+","+
         "`Programmer` = '"+ui->comboBoxProgrammer->currentText()+"'"+","+
         "`Type` = '"+ui->comboBoxType->currentText()+"'"+","+
-        //        "`Reason` = <{Reason: }>, "+
-        //        "`Client` = <{Client: }>, "+
-        //        "`SetupPlace` = <{SetupPlace: }>, "+
+        "`Reason` = '"+ui->textEditReason->toPlainText()+"'"+","+
+        "`Client` = '"+ui->textEditClient->toPlainText()+"'"+","+
+        "`SetupPlace` = '"+ui->textEditSetupPlace->toPlainText()+"'"+","+
         "`SDCardNumber` = '"+ui->textEditSDCardNumber->toPlainText()+"'"+
         "WHERE `id` ='"+QString::number(ids[ControllerModelIndex[0]+1])+"';";
     if(query->exec(req)){
@@ -391,7 +405,7 @@ void Administrator::on_textEdit_textChanged()
   db.open();
   QSqlQuery *query = new QSqlQuery(db);
   if((db.isOpen()) && (checkString(ui->textEdit->toPlainText()))){
-    QString req = "SELECT id, ControllerID, DATE, BoardNumber,SensorNumber,70027Number, Mode, SoftwareVersion, Programmer, Type,SDCardNumber from umfdb.Controllers WHERE `ControllerID` like '%"
+    QString req = "SELECT *"/*id, ControllerID, DATE, BoardNumber,SensorNumber,70027Number, Mode, SoftwareVersion, Programmer, Type,SDCardNumber*/" from umfdb.Controllers WHERE `ControllerID` like '%"
         +ui->textEdit->toPlainText()+"%' or `DATE` like '%"
         +ui->textEdit->toPlainText()+"%' or `BoardNumber` like '%"
         +ui->textEdit->toPlainText()+"%' or `SensorNumber` like '%"
@@ -401,6 +415,9 @@ void Administrator::on_textEdit_textChanged()
         +ui->textEdit->toPlainText()+"%' or `Programmer` like '%"
         +ui->textEdit->toPlainText()+"%' or `Type` like '%"
         +ui->textEdit->toPlainText()+"%' or `SDCardNumber` like '%"
+        +ui->textEdit->toPlainText()+"%' or `Reason` like '%"
+        +ui->textEdit->toPlainText()+"%' or `Client` like '%"
+        +ui->textEdit->toPlainText()+"%' or `SetupPlace` like '%"
         +ui->textEdit->toPlainText()+"%' ORDER BY id DESC;";
     if(query->exec(req)){
       QStandardItemModel *model = new QStandardItemModel;
@@ -416,9 +433,9 @@ void Administrator::on_textEdit_textChanged()
       horizontalHeader.append("Версия ПО");
       horizontalHeader.append("Прошивший");
       horizontalHeader.append("Тип");
-      //horizontalHeader.append("Причина");
-      //horizontalHeader.append("Клиент");
-      //horizontalHeader.append("Место установки");
+      horizontalHeader.append("Причина");
+      horizontalHeader.append("Клиент");
+      horizontalHeader.append("Место установки");
       horizontalHeader.append("Номер SD карты");
 
       //Заголовки строк
@@ -446,6 +463,9 @@ void Administrator::on_textEdit_textChanged()
       ui->tableViewControllers->setModel(model);
       ui->tableViewControllers->resizeRowsToContents();
       ui->tableViewControllers->resizeColumnsToContents();
+      ui->tableViewControllers->setColumnHidden(9,true);
+      ui->tableViewControllers->setColumnHidden(10,true);
+      ui->tableViewControllers->setColumnHidden(11,true);
     } else {
       ui->labelStatus->setText("Статус: Ошибка соединения");
     }
@@ -596,8 +616,10 @@ void Administrator::on_pushButtonRed_clicked()
   db.open();
   QSqlQuery *query = new QSqlQuery(db);
   if(db.isOpen()){
-    if(red[ids[PlatesModelIndex[0]+1]] != 1){
-      QString req = "UPDATE `umfdb`.`Umfs` SET `Color` = 'red' WHERE `idUmf` ='"+QString::number(ids[PlatesModelIndex[0]+1])+"';";
+    qDebug() << red[idUmfs[PlatesModelIndex[0]+1]];
+    if(red[PlatesModelIndex[0]+1] != 1){
+      //red[ids[PlatesModelIndex[0]]] = 1;
+      QString req = "UPDATE `umfdb`.`Umfs` SET `Color` = 'red' WHERE `idUmf` ='"+QString::number(idUmfs[PlatesModelIndex[0]+1])+"';";
       if(query->exec(req)){
         ui->labelPlateStatus->setText("Статус: Всё хорошо");
         printTablePlates();
@@ -606,7 +628,7 @@ void Administrator::on_pushButtonRed_clicked()
         ui->labelPlateStatus->setText("Статус: Ошибка"+query->lastError().text());
       }
     } else {
-      QString req = "UPDATE `umfdb`.`Umfs` SET `Color` = 'white' WHERE `idUmf` ='"+QString::number(ids[PlatesModelIndex[0]+1])+"';";
+      QString req = "UPDATE `umfdb`.`Umfs` SET `Color` = 'white' WHERE `idUmf` ='"+QString::number(idUmfs[PlatesModelIndex[0]+1])+"';";
       if(query->exec(req)){
         ui->labelPlateStatus->setText("Статус: Всё хорошо");
         printTablePlates();
